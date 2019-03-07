@@ -9,17 +9,12 @@ using UnityEngine.EventSystems;
  * Handles the powerbar sliders automatically moving as well as stopping the powerbar via a click. 
  *
  */
-public class Powerbar : Slider, IPointerDownHandler
+public class Powerbar : Slider
 {
     public bool stillMoving = true;
 
     private float growthRate = 0.75f; // Determines how fast the bar will be moving
     private bool goingUp = true;
-
-    public override void OnPointerDown(PointerEventData eventData)
-    {
-        stillMoving = !stillMoving;
-    }
 
     void LateUpdate()
     {

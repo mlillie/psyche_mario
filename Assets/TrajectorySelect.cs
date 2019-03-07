@@ -12,13 +12,15 @@ public class TrajectorySelect : MonoBehaviour
 {
     private float rotationSpeed = 30f;
     private float rotationAngle = 60f;
+    public Transform pivotTransform;
     public float startingRotation;
-    private bool stillMoving = true, positiveMovement = true;
+    public bool stillMoving = true;
+    private bool positiveMovement = false;
     public float currentAngle;
 
     void Start()
     {
-        startingRotation = transform.eulerAngles.z;
+        startingRotation = pivotTransform.eulerAngles.z;
         currentAngle = startingRotation;
     }
 
@@ -35,7 +37,7 @@ public class TrajectorySelect : MonoBehaviour
                 {
                     positiveMovement = false;
                 }
-                transform.eulerAngles = new Vector3(0, 0, currentAngle);
+                pivotTransform.eulerAngles = new Vector3(0, 0, currentAngle);
             } else
             {
                 currentAngle = Mathf.MoveTowards(currentAngle, startingRotation - rotationAngle,
@@ -44,14 +46,9 @@ public class TrajectorySelect : MonoBehaviour
                 {
                     positiveMovement = true;
                 }
-                transform.eulerAngles = new Vector3(0, 0, currentAngle);
+                pivotTransform.eulerAngles = new Vector3(0, 0, currentAngle);
             }
   
         }
-    }
-
-    void OnMouseDown()
-    {
-        stillMoving = !stillMoving;
     }
 }
